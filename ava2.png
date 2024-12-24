@@ -1,0 +1,125 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.awt.geom.*;
+import java.awt.event.*;
+import java.net.*;
+import javax.swing.border.*;
+import java.awt.Color;
+import javax.imageio.*;
+import java.io.*;
+
+public class MyProgram  {
+    
+    public static JFrame f = new JFrame("jesus lives on o-block");
+    
+    public static void main(String[] args) throws MalformedURLException, IOException {
+        // { 
+        java.net.URL ur1 = new java.net.URL("https://"
+                                            + "www.codehs.com"
+                                            + "/uploads/1aa2f1c47fd10d4d0724fae0ae100f94");
+        BufferedImage buff1 = ImageIO.read(ur1);
+        Image imp = buff1.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        
+        Icon yurl = new ImageIcon(imp);
+        // } robot image :)
+        
+        // { 
+        java.net.URL url2 = new java.net.URL("https://"
+                                            + "www.codehs.com"
+                                            + "/uploads/6e465a3879eb1ad5e8b72bb3d4407398");
+        BufferedImage buff2 = ImageIO.read(url2);
+        Image imp2 = buff2.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        
+        Icon yurl2 = new ImageIcon(imp2);
+        // } human image :)
+        
+        Color base = new Color(62, 193, 211);
+        Color midTone = new Color(246, 247, 215);
+        Color high1 = new Color(255, 154, 0);
+        Color high2 = new Color(255, 22, 93);
+        
+        // TITLE PANEL
+        JPanel prompt = new JPanel(new GridBagLayout());
+        
+        JLabel po = new JLabel("Tic-Tac-Toe");
+        po.setFont(new Font("Courier", Font.BOLD, 35));
+        po.setForeground(midTone);
+        prompt.setBackground(base);
+        
+        prompt.add(po);
+        
+        f.add(prompt, BorderLayout.NORTH);
+        prompt.setPreferredSize(new Dimension(550, 150));
+        
+        JButton player = new JButton(yurl2);
+        JButton bot = new JButton(yurl);
+        
+        // main Panel
+        JPanel panel = new JPanel();
+        panel.setBackground(base);
+        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS); 
+        // to set the box layout 
+        panel.setLayout(boxlayout); 
+        
+        panel.setBorder(new EmptyBorder(new Insets(150, 150, 100, 150)));
+        
+        // PLAYER OPTION
+        player.setBackground(midTone);
+        player.setForeground(high1);
+        panel.add(player);
+        panel.add(Box.createRigidArea(new Dimension(5, 50)));
+        
+        // BOT OPTION
+        bot.setBackground(midTone);
+        bot.setForeground(high1);
+        panel.add(bot);
+        
+
+        // help Panel
+        JPanel help = new JPanel();
+        help.setBackground(base);
+        help.setLayout(new BoxLayout(help, BoxLayout.LINE_AXIS));
+        // help Button
+        JButton addBtn = new JButton("?");
+        addBtn.setBounds(380, 550, 25, 20);
+        addBtn.setBorder(new RoundedBorder(5)); //10 is the radius
+        addBtn.setBackground(midTone);
+        addBtn.setForeground(high1);
+        
+        help.add(Box.createRigidArea(new Dimension(0, 50)));
+        help.add(Box.createHorizontalGlue());
+        help.add(addBtn);
+        
+        f.add(panel); 
+        f.add(help, BorderLayout.SOUTH);
+        
+        f.setSize(400, 550);
+        f.setVisible(true);
+    }
+    
+    
+    private static class RoundedBorder implements Border {
+
+    private int radius;
+
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+
+
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+
+
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
+}
+}
